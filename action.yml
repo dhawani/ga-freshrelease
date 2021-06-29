@@ -39,7 +39,7 @@ runs:
     - "-status-regex"
     - ${{ inputs.status-label-regex }}
     - "-str"
-    - ${{ inputs.str }}
+    - ${{ inputs.string }}
 
 branding:
   icon: 'book-open'
