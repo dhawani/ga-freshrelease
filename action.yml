@@ -27,7 +27,7 @@ outputs:
     description: Key of the found issue
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ghcr.io/dhawani/ga-freshrelease:v1.0'
   # -status-regex Invalid -str "VD-45 gm" -token TOKEN -base https://freshworks.freshrelease.com
   args:
     - "-base"
