@@ -9,13 +9,14 @@ import (
 )
 
 var (
-	base           string
-	token          string
-	from           string
-	regex          string
-	str            string
-	statusRegex    string
+	base        string
+	token       string
+	from        string
+	regex       string
+	str         string
+	statusRegex string
 )
+
 func init() {
 	flag.StringVar(&base, "base", "", "Freshrelease Base URL")
 	flag.StringVar(&token, "token", "", "Freshrelease API Token")
@@ -30,6 +31,7 @@ func main() {
 	if from == "string" {
 		issueKey := regexp.MustCompile(regex).FindString(str)
 		if issueKey != "" {
+			fmt.Printf("::set-output name=issue::%s\n", issueKey)
 			fmt.Printf("Issue key matches.\n")
 			if token != "" && base != "" {
 				split := strings.Split(issueKey, "-")
