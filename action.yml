@@ -1,0 +1,46 @@
+# action.yml
+name: Freshrelease - Find Issue
+description: Find issue from GitHub Action Event
+inputs:
+  freshrelease-base-url:
+    description: Freshrelease Base URL
+    required: true
+  token:
+    description: Freshrelease API Token
+    required: true
+  string:
+    description: Provide a string to extract issue key from
+    required: false
+  from:
+    description: Find from predefined place (should be either 'string', 'branch', or 'commits')
+    required: false
+    default: string
+  issue-key-regex:
+    description: Regex to find issue key
+    required: false
+    default: "([a-zA-Z0-9]+-[0-9]+)"
+  status-label-regex:
+    description: Regex to validate status label
+    required: false
+outputs:
+  issue:
+    description: Key of the found issue
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  # -status-regex Invalid -str "VD-45 gm" -token TOKEN -base https://freshworks.freshrelease.com
+  args:
+    - "-base"
+    - ${{ inputs.freshrelease-base-url }}
+    - "-token"
+    - ${{ inputs.token }}
+    - "-regex"
+    - ${{ inputs.issue-key-regex }}
+    - "-status-regex"
+    - ${{ inputs.status-label-regex }}
+    - "-str"
+    - ${{ inputs.str }}
+
+branding:
+  icon: 'book-open'
+  color: 'blue'
